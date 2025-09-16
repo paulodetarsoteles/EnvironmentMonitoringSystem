@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EnvironmentMonitoringSystem.Application.Models.Requests;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EnvironmentMonitoringSystem.API.Controllers
 {
@@ -8,7 +9,7 @@ namespace EnvironmentMonitoringSystem.API.Controllers
     {
         /// <summary>Lista todos os dispositivos cadastrados</summary>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> List()
         {
             try
             {
@@ -22,7 +23,7 @@ namespace EnvironmentMonitoringSystem.API.Controllers
 
         /// <summary>Obtém os detalhes de um dispositivo específico</summary>
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace EnvironmentMonitoringSystem.API.Controllers
 
         /// <summary>: Registra um novo dispositivo no sistema</summary>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] DeviceRequest.Add request)
         {
             try
             {
@@ -51,7 +52,7 @@ namespace EnvironmentMonitoringSystem.API.Controllers
 
         /// <summary>Atualiza as informações de um dispositivo</summary>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] DeviceRequest.Update request)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace EnvironmentMonitoringSystem.API.Controllers
 
         /// <summary>Remove um dispositivo do seu sistema</summary>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try
             {

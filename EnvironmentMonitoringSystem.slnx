@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="EnvironmentMonitoringSystem.API/EnvironmentMonitoringSystem.API.csproj" />
+  <Project Path="EnvironmentMonitoringSystem.Application/EnvironmentMonitoringSystem.Application.csproj" />
   <Project Path="EnvironmentMonitoringSystem.Domain/EnvironmentMonitoringSystem.Domain.csproj" />
 </Solution>
