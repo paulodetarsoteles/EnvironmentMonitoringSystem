@@ -1,0 +1,6 @@
+@EnvironmentMonitoringSystem.API_HostAddress = http://localhost:5011
+
+GET {{EnvironmentMonitoringSystem.API_HostAddress}}
+Accept: application/json
+
+###
