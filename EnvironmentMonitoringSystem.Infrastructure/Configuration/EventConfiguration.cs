@@ -16,6 +16,7 @@ namespace EnvironmentMonitoringSystem.Infrastructure.Configuration
             builder.Property(e => e.Temperature).IsRequired();
             builder.Property(e => e.Humidity).IsRequired();
             builder.Property(e => e.IsAlarm).IsRequired();
+            builder.Property(e => e.DeletionDate).IsRequired(false);
             builder.HasOne(e => e.Device)
                .WithMany(d => d.Events)
                .HasForeignKey(e => e.DeviceId)
