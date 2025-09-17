@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\EnvironmentMonitoringSystem.Application\EnvironmentMonitoringSystem.Application.csproj" />
+	  <ProjectReference Include="..\EnvironmentMonitoringSystem.Infrastructure\EnvironmentMonitoringSystem.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>
