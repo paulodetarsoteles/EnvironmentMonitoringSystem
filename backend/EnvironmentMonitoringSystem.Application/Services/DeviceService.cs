@@ -18,22 +18,22 @@ namespace EnvironmentMonitoringSystem.Application.Services
             _eventService = eventService;
         }
 
-        public async Task<BaseResponse<List<Device>>> ListAsync()
+        public async Task<BaseResponse<List<DeviceListResponse>>> ListAsync()
         {
             var devices = await _deviceRepository.List();
 
             if (devices == null || !devices.Any())
             {
-                return new BaseResponse<List<Device>>
+                return new BaseResponse<List<DeviceListResponse>>
                 {
                     Success = false,
                     ErrorMessages = ["Nenhum dispositivo encontrado"]
                 };
             }
 
-            return new BaseResponse<List<Device>>
+            return new BaseResponse<List<DeviceListResponse>>
             {
-                Data = devices,
+                Data = MapDeviceListResponse(devices),
                 Success = true,
                 ErrorMessages = []
             };
@@ -283,6 +283,24 @@ namespace EnvironmentMonitoringSystem.Application.Services
             if (notifications.Any()) return false;
 
             return true;
+        }
+
+        private static List<DeviceListResponse> MapDeviceListResponse(List<Device> devices)
+        {
+            var result = new List<DeviceListResponse>();
+
+            foreach (var device in devices)
+            {
+                var deviceResponse = new DeviceListResponse
+                {
+                    DeviceName = device.DeviceName,
+                    Location = device.Location,
+                };
+
+                result.Add(deviceResponse);
+            }
+
+            return result;
         }
     }
 }

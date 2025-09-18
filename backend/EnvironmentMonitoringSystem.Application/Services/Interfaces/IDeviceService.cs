@@ -6,7 +6,7 @@ namespace EnvironmentMonitoringSystem.Application.Services.Interfaces
 {
     public interface IDeviceService
     {
-        Task<BaseResponse<List<Device>>> ListAsync();
+        Task<BaseResponse<List<DeviceListResponse>>> ListAsync();
         Task<BaseResponse<Device>> GetByIdAsync(Guid id);
         Task<BaseResponse<bool>> CreateAsync(DeviceRequest.Add request);
         Task<BaseResponse<bool>> UpdateAsync(Guid id, DeviceRequest.Update request);
