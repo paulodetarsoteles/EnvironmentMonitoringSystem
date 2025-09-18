@@ -3,4 +3,5 @@
   <Project Path="EnvironmentMonitoringSystem.Application/EnvironmentMonitoringSystem.Application.csproj" />
   <Project Path="EnvironmentMonitoringSystem.Domain/EnvironmentMonitoringSystem.Domain.csproj" />
   <Project Path="EnvironmentMonitoringSystem.Infrastructure/EnvironmentMonitoringSystem.Infrastructure.csproj" />
+  <Project Path="EnvironmentMonitoringSystem.Test/EnvironmentMonitoringSystem.Test.csproj" Id="37e99b7a-7693-44fb-b6fb-2175189c098a" />
 </Solution>
