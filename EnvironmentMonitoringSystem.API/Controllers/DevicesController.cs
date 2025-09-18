@@ -1,4 +1,5 @@
 ﻿using EnvironmentMonitoringSystem.Application.Models.Requests;
+using EnvironmentMonitoringSystem.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnvironmentMonitoringSystem.API.Controllers
@@ -7,13 +8,26 @@ namespace EnvironmentMonitoringSystem.API.Controllers
     [ApiController]
     public class DevicesController : ControllerBase
     {
+        private readonly IDeviceService _deviceService;
+
+        public DevicesController(IDeviceService deviceService)
+        {
+            _deviceService = deviceService;
+        }
+
         /// <summary>Lista todos os dispositivos cadastrados</summary>
         [HttpGet]
         public async Task<IActionResult> List()
         {
             try
             {
-                return Ok();
+                var result = await _deviceService.ListAsync();
+
+                if (!result.Success && result.ErrorMessages == null || result.ErrorMessages.Count == 0) return NotFound(result);
+
+                if (!result.Success && result.ErrorMessages != null && result.ErrorMessages.Count > 0) return BadRequest(result);
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -23,11 +37,17 @@ namespace EnvironmentMonitoringSystem.API.Controllers
 
         /// <summary>Obtém os detalhes de um dispositivo específico</summary>
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             try
             {
-                return Ok();
+                var result = await _deviceService.GetByIdAsync(id);
+
+                if (!result.Success && result.ErrorMessages == null || result.ErrorMessages.Count == 0) return NotFound(result);
+
+                if (!result.Success && result.ErrorMessages != null && result.ErrorMessages.Count > 0) return BadRequest(result);
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -35,13 +55,16 @@ namespace EnvironmentMonitoringSystem.API.Controllers
             }
         }
 
-        /// <summary>: Registra um novo dispositivo no sistema</summary>
+        /// <summary>Registra um novo dispositivo no sistema</summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] DeviceRequest.Add request)
         {
             try
             {
-                //TODO Registrar um novo dispositivo no moq
+                var result = await _deviceService.CreateAsync(request);
+
+                if (!result.Success) return BadRequest(result);
+
                 return Ok();
             }
             catch (Exception ex)
@@ -52,10 +75,14 @@ namespace EnvironmentMonitoringSystem.API.Controllers
 
         /// <summary>Atualiza as informações de um dispositivo</summary>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] DeviceRequest.Update request)
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] DeviceRequest.Update request)
         {
             try
             {
+                var result = await _deviceService.UpdateAsync(id, request);
+
+                if (!result.Success) return BadRequest(result);
+
                 return Ok();
             }
             catch (Exception ex)
@@ -66,10 +93,14 @@ namespace EnvironmentMonitoringSystem.API.Controllers
 
         /// <summary>Remove um dispositivo do seu sistema</summary>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             try
             {
+                var result = await _deviceService.DeleteAsync(id);
+
+                if (!result.Success) return BadRequest(result);
+
                 return Ok();
             }
             catch (Exception ex)
