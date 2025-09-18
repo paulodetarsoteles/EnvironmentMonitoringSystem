@@ -8,7 +8,7 @@ namespace EnvironmentMonitoringSystem.Infrastructure.Repositories
 {
     public class BaseRepository<T>(AppDbContext context, IUnityOfWork unityOfWork) : IBaseRepository<T> where T : class, IEntity
     {
-        private readonly AppDbContext _context = context;
+        protected readonly AppDbContext _context = context;
         private readonly IUnityOfWork _unityOfWork = unityOfWork;
 
         public virtual async Task<List<T>?> List()

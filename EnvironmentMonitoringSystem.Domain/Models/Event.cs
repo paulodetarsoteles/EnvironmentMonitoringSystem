@@ -13,5 +13,5 @@ namespace EnvironmentMonitoringSystem.Domain.Models
         public DateTime? DeletionDate { get; set; }
 
         public Device? Device { get; set; }
-    }
+    }       
 }
