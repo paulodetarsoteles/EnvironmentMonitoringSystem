@@ -1,4 +1,5 @@
 using EnvironmentMonitoringSystem.API.Extensions;
+using EnvironmentMonitoringSystem.API.Hubs;
 using EnvironmentMonitoringSystem.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -14,6 +15,7 @@ builder.Services.AddDependencyInjectionConfig();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSignalR();
 builder.Services.AddSwaggerGen(options =>
 {
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -37,5 +39,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseDataSeeder<AppDbContext>();
+
+app.MapHub<EventsHub>("/hubs/events");
 
 app.Run();

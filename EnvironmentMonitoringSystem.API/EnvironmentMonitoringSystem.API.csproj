@@ -12,8 +12,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-  </ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11" PrivateAssets="All" />
+    </ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\EnvironmentMonitoringSystem.Application\EnvironmentMonitoringSystem.Application.csproj" />
