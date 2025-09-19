@@ -12,7 +12,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddDependencyInjectionConfig();
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSignalR();
@@ -20,6 +19,16 @@ builder.Services.AddSwaggerGen(options =>
 {
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFront", policy =>
+    {
+        policy.WithOrigins(builder.Configuration["UrlFront"] ?? "http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
 });
 
 var app = builder.Build();
@@ -30,7 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseCors("AllowFront");
 
 app.UseHttpsRedirection();
 
@@ -40,6 +49,6 @@ app.MapControllers();
 
 app.UseDataSeeder<AppDbContext>();
 
-app.MapHub<EventsHub>("/hubs/events");
+app.MapHub<EventsHub>("/api/hubs/events");
 
 app.Run();
