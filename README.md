@@ -3,20 +3,6 @@
 
 Sistema de monitoramento de dispositivos IoT com backend em .NET, frontend em Angular e persistência em SQLite. Permite cadastro de dispositivos, recebimento e visualização de eventos em tempo real.
 
-**Justificativa para o uso da arquitetura:**
-A aplicação foi desenvolvida utilizando uma arquitetura em camadas simplificada (Clean Architecture), composta por Domain, Infrastructure, Application e API, com camada adicional de Testes.
-
-Essa escolha permite uma organização clara onde cada camada tem responsabilidades bem definidas, facilitando a compreensão e o trabalho. 
-
-Alterações em uma camada, como a de persistencia por exemplo, não impactam outras, tornando a evolução do sistema um pouco mais segura.
-
-Tem também a questão da robustez e testabilidade: a lógica de negócio é isolada e testável independentemente da infraestrutura.
-
-A separação também permite aplicar melhorias localizadas, como cache ou processamento assíncrono, sem afetar outras partes do sistema.
-
-Novas funcionalidades ou integrações podem ser adicionadas sem grandes impactos.
-Outro detalhe é que eu puxei um pouco para a minha sardinha, pois foi a arquitetura que mais trabalhei o que facilitou a entrega. 
-
 ---
 
 ## Funcionalidades
