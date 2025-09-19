@@ -1,0 +1,40 @@
+table.mat-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.col-name {
+  width: 30%;
+}
+
+.col-location {
+  width: 40%;
+}
+
+.col-actions {
+  width: 1%;
+  white-space: nowrap; 
+}
+
+.actions-cell button {
+    margin-right: 8px;
+    color: white;
+}
+
+.btn-edit {
+    margin-right: 4px;
+    background-color: #3e70a3;
+    color: whitesmoke;
+}
+
+.btn-view {
+    margin-right: 4px;
+    background-color: #2a802d;
+    color: whitesmoke;
+}
+
+.btn-delete {
+    margin-right: 4px;
+    background-color: #c9352a;
+    color: whitesmoke;
+}

@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Visualizar Dispositivo</h2>
+<mat-dialog-content>
+  <p><strong>Id:</strong> {{ device.id }}</p>
+  <p><strong>Nome:</strong> {{ device.deviceName }}</p>
+  <p><strong>Localização:</strong> {{ device.location }}</p>
+  <p><strong>Data de criação:</strong> {{ device.creationDate | date:'short' }}</p>
+  <p><strong>Última atualização:</strong> {{ device.lastUpdate | date:'short' }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="dialogRef.close()">Fechar</button>
+</mat-dialog-actions>

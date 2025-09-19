@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>
+  {{ mode === 'add' ? 'Adicionar Dispositivo' : mode === 'edit' ? 'Editar Dispositivo' : 'Detalhes do Dispositivo' }}
+</h2>
+
+<form #deviceForm="ngForm">
+  <div mat-dialog-content>
+    <div *ngIf="mode !== 'view'">
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Nome do dispositivo</mat-label>
+        <input matInput [(ngModel)]="device.deviceName" name="deviceName" required #nomeInput="ngModel" />
+        <mat-error *ngIf="nomeInput.invalid && nomeInput.touched">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Localização</mat-label>
+        <input matInput [(ngModel)]="device.location" name="location" required #locInput="ngModel" />
+        <mat-error *ngIf="locInput.invalid && locInput.touched">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="mode === 'view'">
+      <p><strong>Nome:</strong> {{ device.deviceName }}</p>
+      <p><strong>Localização:</strong> {{ device.location }}</p>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="close()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="save()" *ngIf="mode !== 'view'" [disabled]="deviceForm.invalid">
+      Salvar
+    </button>
+  </div>
+</form>
