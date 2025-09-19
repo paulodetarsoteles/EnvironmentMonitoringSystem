@@ -104,21 +104,3 @@ ng serve -o
 ```
 
 Frontend disponível em http://localhost:4200.
-
-
-## Endpoints 
-
-| Método | Endpoint          | Descrição                              |
-| ------ | ----------------- | -------------------------------------- |
-| POST   | /api/devices      | Cadastra dispositivo e integra com IoT |
-| GET    | /api/devices      | Lista dispositivos                     |
-| GET    | /api/devices/{id} | Detalhes do dispositivo                |
-| PUT    | /api/devices/{id} | Atualiza dispositivo                   |
-| DELETE | /api/devices/{id} | Remove dispositivo e desregistra IoT   |
-| POST   | /api/events       | Recebe eventos do simulador IoT        |
-
-## Observações
-
-Eventos com isAlarm: true são destacados no frontend.
-Integração com API Mock de IoT é essencial para registrar e desregistrar dispositivos.
-Banco de dados SQLite é utilizado para simplicidade e portabilidade. 
