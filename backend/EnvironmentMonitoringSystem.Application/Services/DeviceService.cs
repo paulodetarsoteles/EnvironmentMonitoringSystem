@@ -20,23 +20,35 @@ namespace EnvironmentMonitoringSystem.Application.Services
 
         public async Task<BaseResponse<List<DeviceListResponse>>> ListAsync()
         {
-            var devices = await _deviceRepository.List();
+            try
+            {
+                var devices = await _deviceRepository.List();
 
-            if (devices == null || !devices.Any())
+                if (devices == null || !devices.Any())
+                {
+                    return new BaseResponse<List<DeviceListResponse>>
+                    {
+                        Success = true,
+                        ErrorMessages = []
+                    };
+                }
+
+                return new BaseResponse<List<DeviceListResponse>>
+                {
+                    Data = MapDeviceListResponse(devices),
+                    Success = true,
+                    ErrorMessages = []
+                };
+            }
+            catch (Exception ex)
             {
                 return new BaseResponse<List<DeviceListResponse>>
                 {
-                    Success = false,
-                    ErrorMessages = ["Nenhum dispositivo encontrado"]
+                    Data = [],
+                    Success = true,
+                    ErrorMessages = ["Erro interno", ex.Message]
                 };
             }
-
-            return new BaseResponse<List<DeviceListResponse>>
-            {
-                Data = MapDeviceListResponse(devices),
-                Success = true,
-                ErrorMessages = []
-            };
         }
 
         public async Task<BaseResponse<Device>> GetByIdAsync(Guid id)
@@ -45,7 +57,7 @@ namespace EnvironmentMonitoringSystem.Application.Services
             {
                 return new BaseResponse<Device>
                 {
-                    Success = false,
+                    Success = true,
                     ErrorMessages = ["ID inválido"]
                 };
             }
@@ -56,8 +68,8 @@ namespace EnvironmentMonitoringSystem.Application.Services
             {
                 return new BaseResponse<Device>
                 {
-                    Success = false,
-                    ErrorMessages = ["Dispositivo não encontrado"]
+                    Success = true,
+                    ErrorMessages = []
                 };
             }
 
@@ -225,7 +237,7 @@ namespace EnvironmentMonitoringSystem.Application.Services
 
             var hasUnregistered = await _eventService.UnregisterDeviceOnIot(id);
 
-            if (hasUnregistered == false) 
+            if (hasUnregistered == false)
             {
                 return new BaseResponse<bool>
                 {

@@ -23,9 +23,7 @@ namespace EnvironmentMonitoringSystem.API.Controllers
             {
                 var result = await _deviceService.ListAsync();
 
-                if (!result.Success && result.ErrorMessages == null || result.ErrorMessages.Count == 0) return NotFound(result);
-
-                if (!result.Success && result.ErrorMessages != null && result.ErrorMessages.Count > 0) return BadRequest(result);
+                if (!result.Success || result.ErrorMessages != null && result.ErrorMessages.Count > 0) return BadRequest(result);
 
                 return Ok(result);
             }
@@ -43,15 +41,13 @@ namespace EnvironmentMonitoringSystem.API.Controllers
             {
                 var result = await _deviceService.GetByIdAsync(id);
 
-                if (!result.Success && result.ErrorMessages == null || result.ErrorMessages.Count == 0) return NotFound(result);
-
-                if (!result.Success && result.ErrorMessages != null && result.ErrorMessages.Count > 0) return BadRequest(result);
+                if (!result.Success || result.ErrorMessages != null && result.ErrorMessages.Count > 0) return BadRequest(result);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Erro inesperado");
+                return StatusCode(500, $"Erro inesperado: {ex.Message}");
             }
         }
 
