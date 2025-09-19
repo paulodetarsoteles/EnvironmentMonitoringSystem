@@ -305,6 +305,7 @@ namespace EnvironmentMonitoringSystem.Application.Services
             {
                 var deviceResponse = new DeviceListResponse
                 {
+                    Id = device.Id,
                     DeviceName = device.DeviceName,
                     Location = device.Location,
                 };
